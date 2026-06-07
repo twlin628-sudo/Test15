@@ -33,7 +33,6 @@
     overflow: hidden;
   }
 
-  /* 背景紋理 */
   body::before {
     content: '';
     position: fixed;
@@ -45,7 +44,6 @@
     z-index: 0;
   }
 
-  /* 手機框 */
   #app {
     position: relative;
     z-index: 1;
@@ -63,7 +61,6 @@
       inset 0 1px 0 rgba(201,168,76,0.08);
   }
 
-  /* 頂部裝飾線 */
   #app::before {
     content: '';
     position: absolute;
@@ -88,6 +85,12 @@
     margin-bottom: 10px;
   }
 
+  #title-left {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
   #game-title {
     font-family: 'Cinzel', serif;
     font-size: 15px;
@@ -95,6 +98,36 @@
     color: var(--gold);
     text-shadow: 0 0 20px rgba(201,168,76,0.4);
   }
+
+  #version {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    opacity: 0.5;
+  }
+
+  #title-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  #mute-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 13px;
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  #mute-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+  #mute-btn.muted { color: var(--red); border-color: rgba(192,57,43,0.4); }
 
   #restart-btn {
     background: none;
@@ -108,23 +141,12 @@
     transition: all 0.2s;
     letter-spacing: 1px;
   }
-  #restart-btn:hover {
-    border-color: var(--gold-dim);
-    color: var(--gold);
-  }
+  #restart-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
 
   /* 狀態欄 */
-  #status-bar {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  #status-bar { display: flex; flex-direction: column; gap: 6px; }
 
-  .status-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
+  .status-row { display: flex; align-items: flex-start; gap: 8px; }
 
   .status-label {
     font-size: 10px;
@@ -142,12 +164,7 @@
     letter-spacing: 1px;
   }
 
-  #items-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    min-height: 22px;
-  }
+  #items-container { display: flex; flex-wrap: wrap; gap: 5px; min-height: 22px; }
 
   .item-tag {
     background: rgba(201,168,76,0.08);
@@ -157,7 +174,6 @@
     padding: 2px 8px;
     border-radius: 3px;
     letter-spacing: 0.5px;
-    transition: all 0.3s;
     animation: tagIn 0.3s ease;
   }
 
@@ -186,7 +202,6 @@
   #story-area::-webkit-scrollbar-track { background: transparent; }
   #story-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-  /* 分隔線裝飾 */
   .divider {
     display: flex;
     align-items: center;
@@ -202,20 +217,14 @@
   }
   .divider-rune { color: var(--gold-dim); font-size: 10px; }
 
-  /* 故事氣泡 */
-  .story-entry {
-    animation: fadeUp 0.5s ease;
-  }
+  .story-entry { animation: fadeUp 0.5s ease; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  .player-action {
-    text-align: right;
-    margin-bottom: 12px;
-  }
+  .player-action { text-align: right; margin-bottom: 12px; }
 
   .player-bubble {
     display: inline-block;
@@ -230,9 +239,7 @@
     line-height: 1.6;
   }
 
-  .ai-story {
-    margin-bottom: 4px;
-  }
+  .ai-story { margin-bottom: 4px; }
 
   .ai-bubble {
     background: var(--panel);
@@ -243,7 +250,6 @@
     color: var(--ink);
     line-height: 1.9;
     letter-spacing: 0.3px;
-    position: relative;
   }
 
   .ai-bubble::before {
@@ -253,18 +259,28 @@
     margin-right: 6px;
   }
 
-  /* 載入動畫 */
-  #loading {
+  /* 朗讀備援按鈕 */
+  .speak-btn {
     display: none;
-    padding: 16px 0;
-    text-align: center;
+    margin-top: 7px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
   }
+  .speak-btn.visible { display: inline-block; }
+  .speak-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
 
-  .loading-dots {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-  }
+  /* 載入動畫 */
+  #loading { display: none; padding: 16px 0; text-align: center; }
+
+  .loading-dots { display: inline-flex; gap: 6px; align-items: center; }
 
   .dot {
     width: 5px; height: 5px;
@@ -317,11 +333,7 @@
     text-shadow: 0 0 30px rgba(201,168,76,0.5);
   }
 
-  .start-subtitle {
-    font-size: 12px;
-    color: var(--text-dim);
-    letter-spacing: 3px;
-  }
+  .start-subtitle { font-size: 12px; color: var(--text-dim); letter-spacing: 3px; }
 
   #start-btn {
     background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05));
@@ -336,7 +348,6 @@
     transition: all 0.3s;
     margin-top: 8px;
   }
-
   #start-btn:hover {
     background: linear-gradient(135deg, rgba(201,168,76,0.25), rgba(201,168,76,0.1));
     box-shadow: 0 0 20px rgba(201,168,76,0.2);
@@ -352,13 +363,7 @@
     display: none;
   }
 
-  /* 選項按鈕 */
-  #options-area {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 10px;
-  }
+  #options-area { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
 
   .option-btn {
     background: var(--panel);
@@ -375,7 +380,6 @@
     position: relative;
     overflow: hidden;
   }
-
   .option-btn::before {
     content: '';
     position: absolute;
@@ -385,25 +389,11 @@
     opacity: 0;
     transition: opacity 0.2s;
   }
-
-  .option-btn:hover {
-    border-color: var(--gold-dim);
-    color: var(--amber);
-    background: rgba(201,168,76,0.06);
-  }
-
+  .option-btn:hover { border-color: var(--gold-dim); color: var(--amber); background: rgba(201,168,76,0.06); }
   .option-btn:hover::before { opacity: 1; }
+  .option-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  .option-btn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-
-  /* 自訂輸入 */
-  #input-row {
-    display: flex;
-    gap: 8px;
-  }
+  #input-row { display: flex; gap: 8px; }
 
   #action-input {
     flex: 1;
@@ -417,7 +407,6 @@
     outline: none;
     transition: border-color 0.2s;
   }
-
   #action-input::placeholder { color: var(--text-dim); }
   #action-input:focus { border-color: var(--gold-dim); }
 
@@ -435,22 +424,13 @@
     justify-content: center;
     flex-shrink: 0;
   }
-
   #send-btn:hover {
     background: linear-gradient(135deg, rgba(201,168,76,0.3), rgba(201,168,76,0.15));
     box-shadow: 0 0 12px rgba(201,168,76,0.2);
   }
-
   #send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* 錯誤訊息 */
-  .error-msg {
-    color: var(--red);
-    font-size: 11px;
-    text-align: center;
-    padding: 8px;
-    letter-spacing: 1px;
-  }
+  .error-msg { color: var(--red); font-size: 11px; text-align: center; padding: 8px; letter-spacing: 1px; }
 </style>
 </head>
 <body>
@@ -460,8 +440,14 @@
   <!-- 標題列 -->
   <div id="header">
     <div id="title-row">
-      <span id="game-title">裂界漫遊</span>
-      <button id="restart-btn" onclick="restartGame()">↺ 重新開始</button>
+      <div id="title-left">
+        <span id="game-title">裂界漫遊</span>
+        <span id="version">v1.1.0</span>
+      </div>
+      <div id="title-right">
+        <button id="mute-btn" onclick="toggleMute()" title="靜音">🔊</button>
+        <button id="restart-btn" onclick="restartGame()">↺ 重新開始</button>
+      </div>
     </div>
     <div id="status-bar">
       <div class="status-row">
@@ -479,15 +465,12 @@
 
   <!-- 劇情區 -->
   <div id="story-area">
-    <!-- 開始畫面 -->
     <div id="start-screen">
       <div class="start-rune">⚔</div>
       <div class="start-title">裂界漫遊</div>
       <div class="start-subtitle">踏入裂縫，沒有回頭路</div>
       <button id="start-btn" onclick="startGame()">踏入未知</button>
     </div>
-
-    <!-- 載入動畫 -->
     <div id="loading">
       <div class="loading-dots">
         <div class="dot"></div>
@@ -516,29 +499,103 @@
 
 <script>
   const WORKER_URL = "https://text-rpg.twlin628.workers.dev/api/chat/completions";
-  // 路徑說明：Worker 透傳，此路徑直接對應 ai.yy2go.cc/api/chat/completions
 
-  let chatHistory = [];
+  let chatHistory    = [];
   let currentOptions = [];
-  let isLoading = false;
+  let isLoading      = false;
+  let ttsEnabled     = true;       // 靜音開關
+  let ttsUnlocked    = false;      // iOS 手勢授權是否已暖機
+  let pendingStory   = null;       // 暖機期間暫存的 story 文字
+
+  // ── TTS 工具 ──
+
+  // 清理 story 文字，去除符號避免 TTS 唸出奇怪的字
+  function cleanForTTS(text) {
+    return text
+      .replace(/[❧◆⚔★☆▶►→←↑↓]/g, '')
+      .replace(/[「」『』【】《》〈〉]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  // 選最合適的中文語音（iOS 優先 zh-TW，fallback zh-CN / zh）
+  function pickVoice() {
+    const voices = window.speechSynthesis.getVoices();
+    return voices.find(v => v.lang === 'zh-TW')
+        || voices.find(v => v.lang === 'zh-CN')
+        || voices.find(v => v.lang.startsWith('zh'))
+        || null;
+  }
+
+  // 實際朗讀
+  function speakText(text) {
+    if (!ttsEnabled) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(cleanForTTS(text));
+    utter.lang  = 'zh-TW';
+    utter.rate  = 1.0;
+    utter.pitch = 1.0;
+    const voice = pickVoice();
+    if (voice) utter.voice = voice;
+    window.speechSynthesis.speak(utter);
+  }
+
+  // iOS 暖機：在使用者手勢的同步階段先 speak 空字串取得授權
+  function warmupTTS() {
+    if (ttsUnlocked) return;
+    window.speechSynthesis.cancel();
+    const dummy = new SpeechSynthesisUtterance('');
+    dummy.volume = 0;
+    dummy.onend = () => {
+      ttsUnlocked = true;
+      // 如果 AI 已回來但尚未朗讀，現在補讀
+      if (pendingStory) {
+        speakText(pendingStory);
+        pendingStory = null;
+      }
+    };
+    window.speechSynthesis.speak(dummy);
+  }
+
+  // 朗讀 story：若已暖機直接讀，否則存入 pending 等暖機完成
+  function trySpeak(text) {
+    if (!ttsEnabled) return;
+    if (ttsUnlocked) {
+      speakText(text);
+    } else {
+      // 暖機尚未完成，暫存（通常發生在開場自動觸發時）
+      pendingStory = text;
+    }
+  }
+
+  // 靜音切換
+  function toggleMute() {
+    ttsEnabled = !ttsEnabled;
+    const btn = document.getElementById('mute-btn');
+    if (ttsEnabled) {
+      btn.textContent = '🔊';
+      btn.classList.remove('muted');
+    } else {
+      btn.textContent = '🔇';
+      btn.classList.add('muted');
+      window.speechSynthesis.cancel();
+      pendingStory = null;
+    }
+  }
 
   // ── 解析 JSON（容錯版） ──
   function parseJSON(raw) {
-    // 去除 markdown 包裝
     let text = raw.replace(/```json\s*/gi, '').replace(/```\s*/gi, '').trim();
-    // 找第一個 { 與最後一個 }
     const start = text.indexOf('{');
     const end   = text.lastIndexOf('}');
     if (start === -1 || end === -1) throw new Error("No JSON found");
     text = text.slice(start, end + 1);
-    // depth-counting 解析
     return JSON.parse(text);
   }
 
   // ── 更新狀態欄 ──
   function updateStatus(location, items) {
     document.getElementById('location-text').textContent = location || '未知之地';
-
     const container = document.getElementById('items-container');
     container.innerHTML = '';
     if (!items || items.length === 0) {
@@ -573,10 +630,9 @@
     scrollDown();
   }
 
-  function appendStory(text) {
+  function appendStory(text, storyRaw) {
     const area = document.getElementById('story-area');
 
-    // 加分隔線
     const divider = document.createElement('div');
     divider.className = 'divider';
     divider.innerHTML = '<span class="divider-rune">◆</span>';
@@ -584,9 +640,42 @@
 
     const div = document.createElement('div');
     div.className = 'story-entry ai-story';
-    div.innerHTML = `<div class="ai-bubble">${text}</div>`;
+
+    // 備援朗讀按鈕（初始隱藏，TTS 失敗時顯示）
+    div.innerHTML = `
+      <div class="ai-bubble">${text}</div>
+      <button class="speak-btn" onclick="speakText(${JSON.stringify(storyRaw)})">🔊 朗讀</button>
+    `;
     area.appendChild(div);
+
+    // 嘗試自動朗讀
+    const spoken = tryAutoSpeak(storyRaw, div.querySelector('.speak-btn'));
+    if (!spoken) {
+      // 若確定無法自動朗讀，立即顯示備援按鈕
+      div.querySelector('.speak-btn').classList.add('visible');
+    }
+
     scrollDown();
+  }
+
+  // 嘗試自動朗讀，回傳是否成功啟動
+  function tryAutoSpeak(text, fallbackBtn) {
+    if (!ttsEnabled) return true; // 靜音時不需要備援按鈕
+
+    if (ttsUnlocked) {
+      speakText(text);
+      return true;
+    } else {
+      // 暖機尚未完成，存入 pending
+      pendingStory = text;
+      // 500ms 後若還沒有讀，就顯示備援按鈕
+      setTimeout(() => {
+        if (pendingStory === text && ttsEnabled) {
+          fallbackBtn.classList.add('visible');
+        }
+      }, 500);
+      return false;
+    }
   }
 
   function appendError(msg) {
@@ -615,7 +704,6 @@
   // ── 發送訊息給 Worker ──
   async function sendMessage(userText) {
     if (isLoading) return;
-
     chatHistory.push({ role: "user", content: userText });
     setLoading(true);
 
@@ -636,20 +724,20 @@
       chatHistory.push({ role: "assistant", content: content });
 
       updateStatus(data.location, data.items);
-      appendStory(data.story || "（無法讀取劇情）");
+      appendStory(data.story || "（無法讀取劇情）", data.story || "");
       updateOptions(data.options);
 
     } catch (err) {
       appendError("與異界的連結中斷：" + err.message);
-      // 回滾最後一筆 user message
       chatHistory.pop();
     } finally {
       setLoading(false);
     }
   }
 
-  // ── 開始遊戲 ──
+  // ── 開始遊戲（使用者點擊「踏入未知」，此處有手勢授權） ──
   function startGame() {
+    warmupTTS(); // 在手勢同步階段暖機
     document.getElementById('start-screen').remove();
     document.getElementById('controls').style.display = 'block';
     chatHistory = [];
@@ -658,6 +746,8 @@
 
   // ── 重新開始 ──
   function restartGame() {
+    window.speechSynthesis.cancel();
+    pendingStory = null;
     const area = document.getElementById('story-area');
     area.innerHTML = '<div id="loading" style="display:none"><div class="loading-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div><div class="loading-text">命運正在編織⋯</div></div>';
     document.getElementById('controls').style.display = 'none';
@@ -665,8 +755,8 @@
     updateOptions([]);
     chatHistory = [];
     isLoading = false;
+    ttsUnlocked = false; // 重置授權，下次開始時重新暖機
 
-    // 重建開始畫面
     const start = document.createElement('div');
     start.id = 'start-screen';
     start.innerHTML = `
@@ -678,22 +768,29 @@
     area.insertBefore(start, area.firstChild);
   }
 
-  // ── 點擊預設選項 ──
+  // ── 點擊預設選項（有手勢授權，暖機並送出） ──
   function sendOption(index) {
     const text = currentOptions[index];
     if (!text || isLoading) return;
+    warmupTTS();
     appendPlayerAction(text);
     sendMessage(text);
   }
 
-  // ── 自訂行動 ──
+  // ── 自訂行動（有手勢授權） ──
   function sendCustom() {
     const input = document.getElementById('action-input');
     const text = input.value.trim();
     if (!text || isLoading) return;
+    warmupTTS();
     input.value = '';
     appendPlayerAction(text);
     sendMessage(text);
+  }
+
+  // voices 在 iOS 需等 onvoiceschanged 才載入
+  if (typeof speechSynthesis !== 'undefined') {
+    speechSynthesis.onvoiceschanged = () => { /* 預載 */ speechSynthesis.getVoices(); };
   }
 </script>
 </body>
