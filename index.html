@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
 <title>裂界漫遊</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -49,17 +49,23 @@
   /* 桌面版置中容器 */
   #outer {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1;
   }
 
   /* 手機框：桌面版有固定寬高，手機版全屏 */
   #app {
     position: relative;
-    width: min(390px, 100vw);
+    width: min(390px, 100%);  /* 把 100vw 改成 100% */
+    max-width: 100%;
     height: min(720px, 100dvh);
     background: var(--surface);
     border: 1px solid var(--border);
