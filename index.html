@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>裂界漫遊</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
 <style>
@@ -26,12 +26,22 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
     width: 100%;
     height: 100%;
     background: var(--bg);
     font-family: 'Noto Serif TC', serif;
     overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
   }
 
   /* 背景 */
@@ -49,27 +59,21 @@
   /* 桌面版置中容器 */
   #outer {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    max-width: 100vw;
-    overflow: hidden;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
   }
 
   /* 手機框：桌面版有固定寬高，手機版全屏 */
   #app {
     position: relative;
-    width: min(390px, 100%);  /* 把 100vw 改成 100% */
-    max-width: 100%;
-    height: min(720px, 100dvh);
+    width: min(390px, 100%);
+    height: 100dvh; max-height: 720px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: clamp(0px, calc((100vw - 390px) * 999), 20px);
+    border-radius: clamp(0px, calc((100vw - 391px) * 999), 20px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
